@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://ngxwohtx6g56"]
+[gd_scene load_steps=11 format=3 uid="uid://ngxwohtx6g56"]
 
 [ext_resource type="Script" uid="uid://dolss8q5rve2q" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://68350lqcci5b" path="res://player.tscn" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://ytuvfybs4kpb" path="res://mob.tscn" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://h6tlqtb3ir7" path="res://score_label.gd" id="4_1bvp3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
 size = Vector3(60, 2, 60)
@@ -22,6 +23,9 @@ _data = {
 "tilts": PackedFloat32Array(0, 0, 0, 0)
 }
 point_count = 4
+
+[sub_resource type="Theme" id="Theme_lquwl"]
+default_font_size = 25
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -79,6 +83,23 @@ transform = Transform3D(-0.0304488, 1.90824e-05, -0.999536, -9.09494e-13, 1, 1.9
 [node name="MobTimer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="UserInterface" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_lquwl")
+
+[node name="ScoreLabel" type="Label" parent="UserInterface"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 25.0
+offset_right = 95.0
+offset_bottom = 48.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "squished: 0"
+script = ExtResource("4_1bvp3")
 
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
