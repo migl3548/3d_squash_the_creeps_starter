@@ -129,5 +129,17 @@ theme_override_font_sizes/font_size = 60
 text = "you died :(
 (press space)"
 
+[node name="DashPopup" type="Label" parent="UserInterface"]
+visible = false
+layout_mode = 0
+offset_left = 185.0
+offset_top = 76.0
+offset_right = 498.0
+offset_bottom = 135.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 43
+text = "dash unlocked!"
+
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="dash_unlocked" from="UserInterface/ScoreLabel" to="." method="_on_score_label_dash_unlocked"]

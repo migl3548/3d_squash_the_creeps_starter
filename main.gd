@@ -29,8 +29,16 @@ func _on_player_hit() -> void:
 	
 func _ready():
 	$UserInterface/Retry.hide()
+	$UserInterface/DashPopup.hide()
 	
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept") and $UserInterface/Retry.visible:
 		# This restarts the current scene.
 		get_tree().reload_current_scene()
+
+
+func _on_score_label_dash_unlocked() -> void:
+	var popup = $UserInterface/DashPopup
+	popup.show()
+	await get_tree().create_timer(1.0).timeout
+	popup.hide()
