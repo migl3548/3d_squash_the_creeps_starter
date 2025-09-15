@@ -42,3 +42,36 @@ func _on_score_label_dash_unlocked() -> void:
 	popup.show()
 	await get_tree().create_timer(1.0).timeout
 	popup.hide()
+
+
+func _on_top_teleport_area_body_entered(body: Node3D) -> void:
+	if body != $Player:
+		return
+	
+	# teleport player to Ground2 spawn
+	var spawn_pos = $Ground2/Spawn2.global_position
+	$Player.velocity = Vector3.ZERO
+	$Player.global_position = spawn_pos
+
+	# switch camera to the second one
+	$CameraPivot2/Camera3D.current = true
+
+
+func _on_return_teleport_area_2_body_entered(body: Node3D) -> void:
+	if body != $Player:
+		return
+
+	# Avoid instant re-triggering
+	$ReturnTeleportArea2.monitoring = false
+
+	# Teleport the player to Ground/Spawn1
+	var spawn_pos: Vector3 = $Ground/Spawn1.global_position
+	$Player.velocity = Vector3.ZERO
+	$Player.global_position = spawn_pos
+
+	# Switch camera back to the first one
+	$CameraPivot/Camera3D.current = true
+
+	# Small delay, then re-enable the area (prevents ping-ponging)
+	await get_tree().create_timer(0.1).timeout
+	$ReturnTeleportArea2.monitoring = true

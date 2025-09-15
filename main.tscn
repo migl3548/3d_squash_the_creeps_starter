@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ngxwohtx6g56"]
+[gd_scene load_steps=14 format=3 uid="uid://ngxwohtx6g56"]
 
 [ext_resource type="Script" uid="uid://dolss8q5rve2q" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://68350lqcci5b" path="res://player.tscn" id="1_ig7tw"]
@@ -10,6 +10,9 @@ size = Vector3(60, 2, 60)
 
 [sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
 size = Vector3(60, 2, 60)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_color = Color(1, 0.192157, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
 albedo_color = Color(0.743851, 0.800766, 0, 1)
@@ -27,6 +30,10 @@ point_count = 4
 [sub_resource type="Theme" id="Theme_lquwl"]
 default_font_size = 25
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
 mob_scene = ExtResource("2_h2yge")
@@ -42,6 +49,9 @@ shape = SubResource("BoxShape3D_7dm0k")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_7dm0k")
 
+[node name="Spawn1" type="Marker3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
 [node name="Ground2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 80)
 collision_layer = 4
@@ -52,6 +62,10 @@ shape = SubResource("BoxShape3D_7dm0k")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground2"]
 mesh = SubResource("BoxMesh_7dm0k")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
+
+[node name="Spawn2" type="Marker3D" parent="Ground2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.623484, 0.781836, 0, -0.781836, -0.623484, 0, 20.4243, 0)
@@ -60,7 +74,7 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 
 [node name="CameraPivot" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.693691, 0.720273, 0, -0.720273, 0.693691, 0, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 0.857167, 0.515038, 0, -0.515038, 0.857167, 0, 1.4, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18.929)
@@ -68,7 +82,7 @@ projection = 1
 size = 19.0
 
 [node name="CameraPivot2" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.693691, 0.720273, 0, -0.720273, 0.693691, 0, 0.7, 80)
+transform = Transform3D(1, 0, 0, 0, 0.857167, 0.515038, 0, -0.515038, 0.857167, 0, 1.4, 80)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18.929)
@@ -78,19 +92,19 @@ size = 19.0
 [node name="Cylinders" type="Node3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Cylinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2976, 0, -15.2389)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.6913, 0, -21.3097)
 mesh = SubResource("CylinderMesh_ig7tw")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Cylinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2976, 0, 15.542)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.2976, 0, 18.3501)
 mesh = SubResource("CylinderMesh_ig7tw")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Cylinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4462, 0, 15.542)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4462, 0, 18.1166)
 mesh = SubResource("CylinderMesh_ig7tw")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Cylinders"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4462, 0, -14.6518)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4462, 0, -22.4534)
 mesh = SubResource("CylinderMesh_ig7tw")
 
 [node name="SpawnPath" type="Path3D" parent="."]
@@ -159,6 +173,20 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 43
 text = "dash unlocked!"
 
+[node name="TopTeleportArea" type="Area3D" parent="."]
+transform = Transform3D(62.23, 0, 0, 0, 4.88, 0, 0, 0, 5.6, 0, 0, 21.1126)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TopTeleportArea"]
+shape = SubResource("BoxShape3D_1bvp3")
+
+[node name="ReturnTeleportArea2" type="Area3D" parent="."]
+transform = Transform3D(62, 0, 0, 0, 5, 0, 0, 0, 6, 0, 1.91, 58.313)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnTeleportArea2"]
+shape = SubResource("BoxShape3D_lquwl")
+
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="dash_unlocked" from="UserInterface/ScoreLabel" to="." method="_on_score_label_dash_unlocked"]
+[connection signal="body_entered" from="TopTeleportArea" to="." method="_on_top_teleport_area_body_entered"]
+[connection signal="body_entered" from="ReturnTeleportArea2" to="." method="_on_return_teleport_area_2_body_entered"]

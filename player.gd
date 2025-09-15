@@ -52,8 +52,8 @@ func _physics_process(delta):
 	if dash_unlocked and Input.is_action_just_pressed("dash") and direction != Vector3.ZERO and dash_time_left <= 0.0:
 		dash_time_left = dash_duration
 		# Reuse jump_impulse magnitude horizontally
-		target_velocity.x = direction.x * jump_impulse
-		target_velocity.z = direction.z * jump_impulse
+		target_velocity.x = direction.x * jump_impulse * 1.75
+		target_velocity.z = direction.z * jump_impulse * 1.75
 		# Keep current vertical velocity as-is (don’t touch Y here)
 
 	# --- Ground (non-dash) horizontal velocity ---
