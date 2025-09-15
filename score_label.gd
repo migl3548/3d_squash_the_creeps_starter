@@ -8,7 +8,7 @@ var score = 0
 
 func _on_mob_squashed():
 	score += 1
-	text = "squished: %s" % score
+	text = "credits: %s" % score
 	score_changed.emit(score)
 	if score==3:
 		dash_unlocked.emit()
