@@ -12,3 +12,10 @@ func _on_mob_squashed():
 	score_changed.emit(score)
 	if score==3:
 		dash_unlocked.emit()
+
+func adjust_score(amount: int) -> void:
+	score += amount
+	if score < 0:
+		score = 0
+	text = "credits: %s" % score
+	score_changed.emit(score)

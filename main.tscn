@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ngxwohtx6g56"]
+[gd_scene load_steps=16 format=3 uid="uid://ngxwohtx6g56"]
 
 [ext_resource type="Script" uid="uid://dolss8q5rve2q" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://68350lqcci5b" path="res://player.tscn" id="1_ig7tw"]
@@ -12,7 +12,10 @@ size = Vector3(60, 2, 60)
 size = Vector3(60, 2, 60)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
-albedo_color = Color(1, 0.192157, 1, 1)
+albedo_color = Color(0.213669, 0.547286, 0.440654, 1)
+metallic = 0.63
+clearcoat = 0.21
+clearcoat_roughness = 0.78
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7tw"]
 albedo_color = Color(0.743851, 0.800766, 0, 1)
@@ -33,6 +36,10 @@ default_font_size = 25
 [sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1bvp3"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
 
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
@@ -165,12 +172,12 @@ text = "you died :(
 [node name="DashPopup" type="Label" parent="UserInterface"]
 visible = false
 layout_mode = 0
-offset_left = 185.0
-offset_top = 76.0
-offset_right = 498.0
-offset_bottom = 135.0
+offset_left = 431.0
+offset_top = 201.0
+offset_right = 846.0
+offset_bottom = 294.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 43
+theme_override_font_sizes/font_size = 55
 text = "dash unlocked!"
 
 [node name="TopTeleportArea" type="Area3D" parent="."]
@@ -185,8 +192,22 @@ transform = Transform3D(62, 0, 0, 0, 5, 0, 0, 0, 6, 0, 1.91, 58.313)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ReturnTeleportArea2"]
 shape = SubResource("BoxShape3D_lquwl")
 
+[node name="DoubleJumpCube" type="Node3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 9.15997, 0, 92.7234)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DoubleJumpCube"]
+transform = Transform3D(4.76, 0, 0, 0, 2.29, 0, 0, 0, 4.91, 0, 0, 0)
+mesh = SubResource("BoxMesh_1bvp3")
+
+[node name="PickupArea" type="Area3D" parent="DoubleJumpCube"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DoubleJumpCube/PickupArea"]
+transform = Transform3D(5, 0, 0, 0, 2.59, 0, 0, 0, 5, 0, 0, 0)
+shape = SubResource("BoxShape3D_7mycd")
+
 [connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="dash_unlocked" from="UserInterface/ScoreLabel" to="." method="_on_score_label_dash_unlocked"]
 [connection signal="body_entered" from="TopTeleportArea" to="." method="_on_top_teleport_area_body_entered"]
 [connection signal="body_entered" from="ReturnTeleportArea2" to="." method="_on_return_teleport_area_2_body_entered"]
+[connection signal="body_entered" from="DoubleJumpCube/PickupArea" to="." method="_on_pickup_area_body_entered"]

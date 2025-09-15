@@ -75,3 +75,17 @@ func _on_return_teleport_area_2_body_entered(body: Node3D) -> void:
 	# Small delay, then re-enable the area (prevents ping-ponging)
 	await get_tree().create_timer(0.1).timeout
 	$ReturnTeleportArea2.monitoring = true
+
+
+func _on_pickup_area_body_entered(body: Node3D) -> void:
+	if body != $Player:
+		return
+
+	# 1) subtract 6 from score
+	$UserInterface/ScoreLabel.adjust_score(-6)
+
+	# 2) unlock double jump on the player
+	$Player.unlock_double_jump()
+
+	# 3) remove the pickup so it can't be triggered again
+	$DoubleJumpCube.queue_free()

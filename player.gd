@@ -17,6 +17,14 @@ extends CharacterBody3D
 var dash_unlocked := false
 var dash_time_left := 0.0
 
+#double jump
+@export var double_jump_multiplier := 3.0   # ~3x the normal jump height
+var double_jump_unlocked := false
+var has_double_jumped := false
+
+func unlock_double_jump():
+	double_jump_unlocked = true
+
 # Emitted when the player was hit by a mob.
 # Put this at the top of the script.
 signal hit
@@ -68,6 +76,15 @@ func _physics_process(delta):
 	# --- Jump ---
 	if is_on_floor() and Input.is_action_just_pressed("jump"):
 		target_velocity.y = jump_impulse
+	
+	# Double jump: press jump in air once, if unlocked
+	if not is_on_floor() and double_jump_unlocked and not has_double_jumped and Input.is_action_just_pressed("jump"):
+		target_velocity.y = jump_impulse * double_jump_multiplier
+		has_double_jumped = true
+
+	# right after your normal Jump block is fine:
+	if is_on_floor():
+		has_double_jumped = false
 
 	# --- Bounce-on-mob (unchanged) ---
 	for index in range(get_slide_collision_count()):
