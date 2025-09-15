@@ -42,6 +42,17 @@ shape = SubResource("BoxShape3D_7dm0k")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
 mesh = SubResource("BoxMesh_7dm0k")
 
+[node name="Ground2" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 80)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground2"]
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground2"]
+mesh = SubResource("BoxMesh_7dm0k")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.623484, 0.781836, 0, -0.781836, -0.623484, 0, 20.4243, 0)
 shadow_enabled = true
@@ -49,9 +60,17 @@ shadow_enabled = true
 [node name="Player" parent="." instance=ExtResource("1_ig7tw")]
 
 [node name="CameraPivot" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.693691, 0.720273, 0, -0.720273, 0.693691, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.693691, 0.720273, 0, -0.720273, 0.693691, 0, 0.7, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18.929)
+projection = 1
+size = 19.0
+
+[node name="CameraPivot2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.693691, 0.720273, 0, -0.720273, 0.693691, 0, 0.7, 80)
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 18.929)
 projection = 1
 size = 19.0
