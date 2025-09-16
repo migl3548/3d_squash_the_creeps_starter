@@ -18,7 +18,7 @@ var dash_unlocked := false
 var dash_time_left := 0.0
 
 #double jump
-@export var double_jump_multiplier := 3.0   # ~3x the normal jump height
+@export var double_jump_multiplier := 2.0   # ~3x the normal jump height
 var double_jump_unlocked := false
 var has_double_jumped := false
 
